@@ -1,0 +1,66 @@
+version: '3.4'
+
+services:
+
+  rc.smh.postgres:
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=smarthouse
+    volumes:
+      - smh_postgres_data:/var/lib/postgresql/data
+      - smh_postgres_tmp:/tmp/postgresql/backups
+    labels:
+      - "docker-volume-backup.exec-pre-backup=create_backup.sh"
+      - "docker-volume-backup.exec-post-backup=remove_backups.sh"
+    hostname: rc.postgres.smh
+    container_name: rc-smh-postgres
+    image: postgres.smh:rc
+    expose:
+      - "5432"
+
+  rc.smh.backend:
+    build:
+      context: ./smh-backend/target/out
+      dockerfile: Dockerfile
+    hostname: rc.backend.smh
+    container_name: rc-smh-backend
+    image: backend.smh:rc
+    volumes:
+      - smh_backend_file_storage:/file-storage
+      - smh_backend_logs:/logs
+      - smh_backend_tmp:/tmp
+      - smh_backend_config:/config
+    labels:
+      - "docker-volume-backup.stop-during-backup=true"
+    environment:
+      - SPRING_PROFILES_ACTIVE=rc
+    depends_on:
+      - rc.smh.postgres
+    ports:
+      - "8000:8080"
+    links:
+      - "rc.smh.postgres:rc.postgres.smh"
+
+  rc.smh.backup:
+    image: futurice/docker-volume-backup:2.3.0
+    container_name: rc-smh-backup
+    environment:
+      - BACKUP_CRON_EXPRESSION=0 3 * * 0/7
+      - BACKUP_FILENAME=smh-rc-%Y-%m-%dT%H-%M-%S%Z.tar.gz
+      - BACKUP_CUSTOM_LABEL=com.docker.compose.project=rc
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - smh_postgres_tmp:/backup/postgres:ro
+      - smh_backend_file_storage:/backup/backend_file_storage:ro
+      - smh_backend_logs:/backup/backend_logs:ro
+      - smh_backend_config:/backup/backend_config:ro
+      - /root/backups_smh/rc:/archive
+volumes:
+  smh_postgres_data:
+  smh_postgres_tmp:
+  smh_backend_logs:
+  smh_backend_file_storage:
+  smh_backend_tmp:
+  smh_backend_config:

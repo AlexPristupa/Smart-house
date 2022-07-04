@@ -1,0 +1,10 @@
+--роль:smarthouse пароль:smarthouse
+CREATE ROLE smarthouse LOGIN
+  ENCRYPTED PASSWORD 'md565e1351b9f20502f428e06183165bdc0'
+  NOSUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION;
+
+CREATE DATABASE smarthouse
+  WITH OWNER = smarthouse
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       CONNECTION LIMIT = -1;

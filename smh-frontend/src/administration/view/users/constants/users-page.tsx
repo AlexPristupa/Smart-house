@@ -1,0 +1,5 @@
+export enum PAGE_USERS_TYPE {
+  USERS_LIST = 'USERS_LIST',
+  USER = 'USER',
+  USER_EDIT = 'USER_EDIT',
+}

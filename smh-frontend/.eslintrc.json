@@ -1,0 +1,13 @@
+{
+  "extends": "react-app",
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "endOfLine": "auto" // для совместимости windows и linux после клонирования 
+    }, {
+      "usePrettierrc": true
+    }], // использовать .prettierrc конфу как первоисточник
+    "import/no-anonymous-default-export": 0,
+    "no-sequences": 0
+  }
+}

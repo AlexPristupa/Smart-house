@@ -1,0 +1,154 @@
+{
+  "users": [{
+    "id": 1,
+    "lastName": "Иванов",
+    "firstName": "Иван",
+    "middleName": "Иванович",
+    "email": "acrtr@yandex.ru",
+    "password": "12345678"
+  }],
+  "buildings": [{
+      "id": 1,
+      "name": "ЖК Арт",
+      "photo": "https://novostroycity.ru/uploads/html_uploaded/ART/%D0%A42.jpg",
+      "address": "г. Красногорск, ул. Авангардная"
+    },
+    {
+      "id": 2,
+      "name": "ЖК Молодежный",
+      "photo": "https://cdn-p.cian.site/images/272/222/molodezhnyy-krasnogorsk-jk-22227204-6.jpg",
+      "address": "г. Красногорск, ул. Центральная"
+    }
+  ],
+  "services": [{
+      "id": 1,
+      "content": [{
+          "id": 1,
+          "type": "PHONE_INSTALLATION",
+          "name": "Установка телефонной связи",
+          "description": "Заказать сервис подключения телефонных услуг",
+          "dateStartWork": "22.03.2012",
+          "dateFinishWork": "22.03.2013",
+          "status": true
+        },
+        {
+          "id": 2,
+          "type": "STORAGE_LEASE",
+          "name": "Аренда хранилища",
+          "description": "Арендовать подземное помещение для хранения личных вещей",
+          "dateStartWork": "22.03.2012",
+          "dateFinishWork": "22.03.2013",
+          "status": false
+        },
+        {
+          "id": 3,
+          "type": "PHONE_INSTALLATION",
+          "name": "Установка телефонной связи",
+          "description": "Заказать сервис подключения телефонных услуг",
+          "dateStartWork": "22.03.2012",
+          "dateFinishWork": "22.03.2013",
+          "status": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "content": [{
+          "id": 4,
+          "type": "STORAGE_LEASE",
+          "name": "Аренда хранилища",
+          "description": "Арендовать подземное помещение для хранения личных вещей",
+          "dateStartWork": "22.03.2012",
+          "dateFinishWork": "22.03.2013",
+          "status": false
+        },
+        {
+          "id": 5,
+          "type": "AD",
+          "name": "Размещение рекламы",
+          "description": "Разместить рекламу или объявления на территории ЖК",
+          "dateStartWork": "22.03.2012",
+          "dateFinishWork": "22.03.2013",
+          "status": true
+        }
+      ]
+    }
+  ],
+  "hardware": [{
+      "id": 1,
+      "content": [{
+          "id": 1,
+          "name": "Счетчик воды ГС-3325",
+          "mark": "Супер",
+          "serialNumber": "13134343543432",
+          "dateInstallation": "22.03.2012",
+          "dateExpiration": "19.01.2021",
+          "installer": "Иванов И.И.",
+          "photo": "https://cdn-p.cian.site/images/272/222/molodezhnyy-krasnogorsk-jk-22227204-6.jpg"
+        },
+        {
+          "id": 2,
+          "name": "Счетчик воды ГС-3325",
+          "mark": "Супер",
+          "serialNumber": "13134343543432",
+          "dateInstallation": "22.03.2012",
+          "dateExpiration": "12.12.1998",
+          "installer": "Иванов И.И.",
+          "photo": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "content": [{
+        "id": 3,
+        "name": "IP каммера Commelit",
+        "mark": "Супер",
+        "serialNumber": "13134343543432",
+        "dateInstallation": "22.03.2012",
+        "dateExpiration": "12.12.1998",
+        "installer": "Иванов И.И.",
+        "photo": "https://cdn-p.cian.site/images/272/222/molodezhnyy-krasnogorsk-jk-22227204-6.jpg"
+      }]
+    }
+  ],
+  "docs": [{
+      "id": 1,
+      "content": [{
+          "id": 1,
+          "type": "PHONE_INSTALLATION",
+          "name": "Установка телефонной связи",
+          "description": "Заказать сервис подключения телефонных услуг"
+        },
+        {
+          "id": 2,
+          "type": "STORAGE_LEASE",
+          "name": "Аренда хранилища",
+          "description": "Арендовать подземное помещение для хранения личных вещей"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "content": [{
+          "id": 3,
+          "type": "PHONE_INSTALLATION",
+          "name": "Установка телефонной связи",
+          "description": "Заказать сервис подключения телефонных услуг"
+        },
+        {
+          "id": 4,
+          "type": "STORAGE_LEASE",
+          "name": "Аренда хранилища",
+          "description": "Арендовать подземное помещение для хранения личных вещей"
+        },
+        {
+          "id": 5,
+          "type": "AD",
+          "name": "Размещение рекламы",
+          "description": "Разместить рекламу или объявления на территории ЖК"
+        }
+      ]
+    }
+  ]
+}

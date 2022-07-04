@@ -1,0 +1,230 @@
+{
+  "authPage": {
+    "tabName": {
+      "login": "Вход",
+      "registration": "Регистрация"
+    }
+  },
+  "header": {
+    "title": {
+      "objects": "Объекты"
+    }
+  },
+  "building": {
+    "page": {
+      "button": {
+        "addService": "Добавить сервис",
+        "addDocument": "Добавить документ",
+        "addHardware": "Добавить оборудование"
+      }
+    },
+    "form": {
+      "photo": "Аватар",
+      "image": "Картинки объекта",
+      "name": "Название объекта",
+      "address": "Адрес",
+      "description": "Описание",
+      "title": {
+        "addBuilding": "Добавление объекта",
+        "editBuilding": "Редактирование объекта"
+      }
+    }
+  },
+  "hardware": {
+    "card": {
+      "model": "Mарка оборудования",
+      "serialNumber": "Cерийный номер",
+      "installedAt": "Дата установки",
+      "expiresAt": "Срок годности",
+      "installer": "Установщик",
+      "nameBuilding": "Название"
+    },
+    "form": {
+      "photo": "Оборудование",
+      "image": "Картинки оборудования",
+      "title": {
+        "addHardware": "Добавление оборудования",
+        "editHardware": "Редактирование оборудования"
+      }
+    }
+  },
+  "service": {
+    "form": {
+      "title": {
+        "addService": "Добавление сервиса",
+        "editService": "Редактирование сервиса",
+        "resolved": "Выполнено",
+        "unresolved": "В ожидании"
+      },
+      "date": "Дата"
+    },
+    "card": {
+      "type": "Тип сервиса",
+      "workTime": "Время проведения работ",
+      "statusTitle": "Статус",
+      "startTime": "Начало работ",
+      "finishTime": "Окончание работ",
+      "status": {
+        "done": "Выполнено",
+        "inProgress": "В ожидании"
+      },
+      "description": "Описание",
+      "name": "Название"
+    }
+  },
+  "profile": {
+    "title": "Профиль",
+    "fio": "ФИО",
+    "lastName": "Фамилия",
+    "firstName": "Имя",
+    "patronymic": "Отчество",
+    "email": "Адрес электронной почты",
+    "avatar": "аватар",
+    "birthDate": "Дата рождения",
+    "editProfile": "Редактирование профиля"
+  },
+  "button": {
+    "register": "Зарегистрироваться",
+    "login": "Войти",
+    "addObj": "Добавить объект",
+    "save": "Сохранить",
+    "cancel": "Отменить",
+    "load": "Загрузить",
+    "continue": "Продолжить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "back": "Назад",
+    "searchDocument": "Поиск документов",
+    "addHardware": "Добавление оборудования",
+    "resolutionBtn": {
+      "resolved": "RESOLVED",
+      "unresolved": "UNRESOLVED"
+    },
+    "editName": "Изменить название",
+    "download": "Скачать",
+    "logout": "Выйти",
+    "viewAll": "Показать все"
+  },
+  "tabName": {
+    "hardware": "Оборудование",
+    "documentation": "Документация",
+    "services": "Сервисы"
+  },
+  "pages": {
+    "buildings": "Объекты",
+    "manuals": "Справочники",
+    "users": "Пользователи"
+  },
+  "placeholder": {
+    "registration": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "birthDate": "Дата рождения",
+      "email": "Email",
+      "password": "Пароль",
+      "passwordRepeat": "Повторить пароль",
+      "patronymic": "Отчество"
+    },
+    "login": {
+      "username": "Email",
+      "password": "Пароль"
+    }
+  },
+  "rules": {
+    "required": "Обязательное поле",
+    "min": "Поле не должно быть меньше",
+    "max": "Поле не должно превышать",
+    "email": "Введите валидный адрес электронной почты",
+    "symbol": "символ",
+    "isEqualToField": "Пароли должны совпадать",
+    "data-validation": {
+      "email-not-unique": "Данный Email уже используется",
+      "password-invalid-format": "Пароль должен иметь не менее 8 символов, содержать буквы латинского алфавита и цифры. Также доступен ввод символов: `!@#$%^&*()_=+[]{}",
+      "not-only-letters": "В строке должны быть только буквы",
+      "empty-field": "Строка не должна быть пустой",
+      "email-not-valid": "E-mail должен соответсвовать паттерну",
+      "phone-not-unique": "Телефон должен быть уникальным",
+      "phone-not-valid": "Телефон должен содержать 11 цифр",
+      "password-not-equals": "Пароли не идентичны",
+      "invalid-password": "Неверно указан пароль",
+      "service-type-not-exist": "Такого типа сервиса не существует",
+      "document-group-not-exist": "Такой группы документов не существует",
+      "files-count-max-10": "Kоличество файлов должно быть до десяти",
+      "name-not-unique": "Имя записи не уникально"
+    },
+    "validation": {
+      "file-not-exist": "Файл с указанным contentId не найден",
+      "file-empty": "Файл не указан или пустой",
+      "invalid-file-type": "Неподходящий тип файла",
+      "ambiguous-request": "Неоднозначный запрос. Непонятно чего хочет автор запроса",
+      "entity-should-be-in-status": "Для выполнения операции над сущностью, она должна быть в указанном статусе",
+      "entity-should-not-be-in-status": "Для выполнения операции над сущностью, она не должна быть в указанном статусе",
+      "invalid-format": "Некорректный формат данных"
+    },
+    "behavior-validation": {
+      "phone-or-email-not-unique": "Телефон или email не уникальны",
+      "no-attached-files": "Отсутствуют прилагаемые файлы",
+      "failed-to-save-a-file": "Ошибка сохранения файла",
+      "content-not-found": "Контент не найден",
+      "content-gone": "Контент более не доступен / удален",
+      "user-not-found": "Пользователь не найден",
+      "record-not-found": "Запись не найдена",
+      "record-not-accessible": "Нет доступа к записи",
+      "parent-node-should-be-folder": "Нельзя поместить файл в другой файл",
+      "node-is-not-a-folder": "Файл не содержит список других файлов",
+      "file-name-is-not-unique": "Уже есть файл с таким именем",
+      "folder-name-is-not-unique": "Уже есть папка с таким именем",
+      "model-with-serial-number-not-unique": "Значение не уникально",
+      "behavior-validation.name-with-address-not-unique": "Название и адрес объекта не уникальны",
+      "behavior-validation.record-in-use": "Запись используется для другой модели",
+      "behavior-validation.insufficient-rights": "Недостаточно прав для выполнения данной операции",
+      "behavior-validation.forbidden": "Доступ к выбранному эндпоинту запрещен"
+    },
+    "wrongData": "Неверные данные для входа",
+    "wrongPassword": "Неверно указан пароль"
+  },
+  "messageSystem": {
+    "placeholder": "Введите значение",
+    "errorValidating": "Обязательное поле",
+    "modal": {
+      "warningTitle": "Предупреждение",
+      "warningContent": "Изменения не сохранятся. Продолжить?",
+      "deleteTitle": "Удаление",
+      "deleteContent": "Действительно хотите удалить"
+    },
+    "error": "Ошибка сервера",
+    "noData": "Нет данных",
+    "noNew": "Нет новых"
+  },
+  "users": {
+    "card": {
+      "email": "Адрес электронной почты",
+      "role": "Роль"
+    },
+    "title": "Пользователи",
+    "addUser": "Добавить пользователя",
+    "form": {
+      "lastName": "Фамилия",
+      "firstName": "Имя",
+      "patronymic": "Отчество",
+      "email": "Адрес электронной почты",
+      "role": "Роль"
+    },
+    "roles": {
+      "ADMIN": "Админ",
+      "ROOT": "Владелец",
+      "WRITER": "Редактор",
+      "READER": "Просмотр"
+    }
+  },
+  "typeList": {
+    "title": "Типы сервисов",
+    "addType": "Добавить тип сервиса"
+  },
+  "footer": {
+    "title": "© Prooftech IT"
+  },
+  "notifications": {
+    "title": "Уведомления"
+  }
+}

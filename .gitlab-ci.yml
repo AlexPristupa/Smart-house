@@ -1,0 +1,149 @@
+cache:
+  paths:
+    - .m2/
+
+variables:
+  GIT_STRATEGY: fetch
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+  DOCKER_PROFILE: dev
+  DOCKER_HOST: none
+
+stages:
+  - test
+  - build
+  - build docker
+  - undeploy
+  - deploy
+  - clean
+
+#----------
+#   Backend
+#----------
+#Шаблон
+.backend: &backend_template
+  image: maven:3.8.2-openjdk-16-slim
+  only:
+    - master
+    - dev
+    - /^feature*/
+    - /^bugfix*/
+    - /^release*/
+    - tags
+
+#Юнит тесты
+test:backend:
+  <<: *backend_template
+  stage: test
+  script:
+    - mvn clean test -pl smh-backend -am --errors --batch-mode
+
+#Сборка без юнит тестов
+build:backend:
+  <<: *backend_template
+  stage: build
+  dependencies:
+    - test:backend
+#    - test:frontend
+  variables:
+    MAVEN_ARGS: ""
+  before_script:
+    - case $CI_COMMIT_REF_NAME in
+      master)
+        MAVEN_ARGS="-P prod"
+      ;;
+      dev)
+        MAVEN_ARGS="-P dev"
+      ;;
+      $RELEASE_CANDIDATE_BRANCH)
+        MAVEN_ARGS="-P rc"
+      ;;
+      esac
+    - echo MAVEN_ARGS=$MAVEN_ARGS
+  script:
+    - mvn clean package -DskipTests --errors --batch-mode $MAVEN_ARGS
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - smh-backend/target/out
+
+#-----------
+#   Frontend
+#-----------
+#Шаблон
+.frontend: &frontend_template
+  image: node:14.5.0-alpine
+  dependencies: []
+  only:
+    - master
+    - dev
+    - /^feature*/
+    - /^release*/
+    - /^bugfix*/
+    - tags
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - smh-frontend/node_modules/
+  before_script:
+    - cd smh-frontend/
+    - yarn config set prefer-offline true
+    - yarn install
+
+#Сборка фронта будет происходить в рамках сборки бэкенда. Нет смысла дублировать
+#build:frontend:
+#  <<: *frontend_template
+#  stage: build
+#  script:
+#    - npm run build
+#  artifacts:
+#    expire_in: 30 min
+#    paths:
+#      - smh-frontend/build
+
+#Запуск юнит тестов
+# Тесты еще не готовы
+#test:frontend:
+#  <<: *frontend_template
+#  stage: test
+#  script:
+#    - npm run test
+
+#-----------
+#   docker
+#-----------
+build:docker:
+  image: $REGISTRY_PROOFTECHIT_HOST/docker/build-tools:14-jdk
+  stage: build docker
+  dependencies:
+    - build:backend
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+    - if: '$CI_COMMIT_REF_NAME == "dev"'
+    - if: '$CI_COMMIT_REF_NAME == $RELEASE_CANDIDATE_BRANCH'
+  before_script:
+    - echo CI_COMMIT_REF_NAME $CI_COMMIT_REF_NAME
+    - echo RELEASE_CANDIDATE_BRANCH $RELEASE_CANDIDATE_BRANCH
+    - case "$CI_COMMIT_REF_NAME" in
+      master)
+        DOCKER_PROFILE=prod;
+        DOCKER_HOST="$PROD_DOCKER_HOST";
+      ;;
+      dev)
+        DOCKER_PROFILE=dev;
+        DOCKER_HOST="$DEV_DOCKER_HOST";
+      ;;
+      "$RELEASE_CANDIDATE_BRANCH")
+        DOCKER_PROFILE=rc;
+        DOCKER_HOST="$DEV_DOCKER_HOST";
+      esac
+    - echo DOCKER_PROFILE $DOCKER_PROFILE
+    - echo DOCKER_HOST $DOCKER_HOST
+  script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY_PROOFTECHIT_HOST
+    - docker-compose -f docker-compose.smh-$DOCKER_PROFILE.yml -H $DOCKER_HOST -p smh-$DOCKER_PROFILE down --rmi all --remove-orphans
+    - docker-compose -f docker-compose.smh-$DOCKER_PROFILE.yml -H $DOCKER_HOST -p smh-$DOCKER_PROFILE up --build -d $DOCKER_PROFILE.smh.postgres
+    - docker-compose -f docker-compose.smh-$DOCKER_PROFILE.yml -H $DOCKER_HOST -p smh-$DOCKER_PROFILE up --build -d $DOCKER_PROFILE.smh.backup
+    - docker-compose -f docker-compose.smh-$DOCKER_PROFILE.yml -H $DOCKER_HOST -p smh-$DOCKER_PROFILE exec -T $DOCKER_PROFILE.smh.backup ./backup.sh
+    - docker-compose -f docker-compose.smh-$DOCKER_PROFILE.yml -H $DOCKER_HOST -p smh-$DOCKER_PROFILE up --build -d

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>ru.prooftechit</groupId>
+    <artifactId>smh-base</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>smh-frontend</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Smart House Frontend module</name>
+
+  <properties>
+    <yarn-run-target>build</yarn-run-target>
+  </properties>
+
+<!--  <profiles>-->
+<!--    <profile>-->
+<!--      <id>dev</id>-->
+<!--      <properties>-->
+<!--        <yarn-target>build-profile:dev</yarn-target>-->
+<!--      </properties>-->
+<!--    </profile>-->
+<!--    <profile>-->
+<!--      <id>rc</id>-->
+<!--      <properties>-->
+<!--        <yarn-target>build-profile:rc</yarn-target>-->
+<!--      </properties>-->
+<!--    </profile>-->
+<!--    <profile>-->
+<!--      <id>prod</id>-->
+<!--      <properties>-->
+<!--        <yarn-target>build-profile:prod</yarn-target>-->
+<!--      </properties>-->
+<!--    </profile>-->
+<!--  </profiles>-->
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>auto-clean</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>build</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <configuration>
+          <nodeVersion>v14.17.6</nodeVersion>
+          <yarnVersion>v1.22.11</yarnVersion>
+          <installDirectory>node_installation</installDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install node and yarn</id>
+            <goals>
+              <goal>install-node-and-yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+          </execution>
+          <execution>
+            <id>yarn install</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn build</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>${yarn-run-target}</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
